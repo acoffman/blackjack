@@ -9,8 +9,8 @@ class Card
 		@value = value;
 	end
 
-	#Returns the numeric value of the card, face value for 2-9, 10 for 
-	#face cards, and one and 11 for aces.
+	#Returns the numeric value of the card as a one or two element array.
+	#face value for 2-9, 10 for face cards, and one and 11 for aces.
 	def value
 		return [@value] if not @@FACE_CARDS_AND_ACE.include? @value
 		return [1, 11] if @value == :ace

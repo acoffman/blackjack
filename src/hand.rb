@@ -28,7 +28,7 @@ class Hand
 	end
 
 	#Returns the numeric value of the hand as a one element array
-	#or a two element array if two possible values.
+	#or a multi element array if more than one possible value.
 	def hand_value
 		values = [0]
 

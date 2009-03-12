@@ -38,4 +38,4 @@ end
 #there were any failures.
 puts results + "\n"
 puts "Overall there were #{total_tests} total tests, #{total_failures} of which failed."
-puts "The test pass rate was: #{(total_tests-total_failures)/(total_tests * 1.0)*100}%"
+puts "The test pass rate was #{(total_tests-total_failures)/(total_tests * 1.0)*100}%"

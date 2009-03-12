@@ -1,0 +1,8 @@
+This is a blackjack program that I wrote as part of the interview process for Rapleaf, a San Francisco based web startup. Rapleaf aggregates publically available information from the social web and delivers reports on their findings to companies that desire to offer a better, more targeted customer experience.
+
+The program can be run at the command line with ruby blackjack.rb
+Automated tests can be run at the command line with ruby spec_runner.rb
+
+If you are interested in Rapleaf, their website resides at www.rapleaf.com
+
+If you are interested in more of my work, check out thecoffman.github.com

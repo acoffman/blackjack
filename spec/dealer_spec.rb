@@ -12,6 +12,8 @@ describe Dealer do
 		@stand_hand = Hand.new([Card.new(:hearts, :ace),Card.new(:hearts, :king)],false)
 		@hit_hand2 = Hand.new([Card.new(:hearts, :ace), Card.new(:spades, :ace), Card.new(:clubs, 5)],false)
 		@stand_hand2 = Hand.new([Card.new(:hearts, 10), Card.new(:hearts, 8)],false)
+		@bust_hand = Hand.new([Card.new(:hearts, 10), Card.new(:hearts, 8), Card.new(:hearts,7)],false)
+
 	end
 
 	it "should hit soft hands 17 and under, and stand otherwise" do
@@ -28,6 +30,10 @@ describe Dealer do
 
 		@test_dealer.clear!
 		@test_dealer.add_hand(@stand_hand2)
+		@test_dealer.must_hit?.should_not == true
+
+		@test_dealer.clear!
+		@test_dealer.add_hand(@bust_hand)
 		@test_dealer.must_hit?.should_not == true
 	end
 

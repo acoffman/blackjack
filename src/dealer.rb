@@ -13,6 +13,9 @@ class Dealer < Player
 	def must_hit?
 		#weed out bust values
 		valid_values = @hands[0].hand_value.reject {|x| x > 21}
+
+		#hand is a bust - stand
+		return false if valid_values.length == 0
 		#dealer has a hand with a possible value over 17 - stand
 		return false if valid_values.max > 17 
 		#dealer has a hand with no values over 17 - hit

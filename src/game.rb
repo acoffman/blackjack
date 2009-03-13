@@ -61,8 +61,15 @@ class Game
 		
 	end
 
-	def prompt(player,hand)
+	def prompt(player,hand_num)
 		prompt = player.to_s << "\n"
+		prompt << "Select an option to continue:\n "
+		prompt << "H: Hit\n"
+		prompt << "S: Stand\n"
+		prompt << "P: Split\n" if player.hands[hand_num].splitable?
+		prompt << "D: Double Down\n" if player.money >= player.bets[hand_num]
+		
+
 		
 	end
 

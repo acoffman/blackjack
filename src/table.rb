@@ -1,4 +1,4 @@
-%w(shoe player human_player dealer card hand).each do |file|
+%w(shoe player human_player dealer).each do |file|
 	require File.dirname(__FILE__) + "/" + file	
 end
 
@@ -52,9 +52,10 @@ class Table
 		return input =~ /^[0-9]+$/
 	end
 
-	private :is_integer?, :add_dealer, :add_human_player
+	#no one needs to use these methods externally
+	private :is_integer?, :add_dealer, :add_human_player, :set_up_players
+
+	attr_accessor :players, :shoe
 
 end
 
-
-test = Table.new(4)

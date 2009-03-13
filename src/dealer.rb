@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/player.rb'
+require File.dirname(__FILE__) + '/player'
 
 class Dealer < Player
 
@@ -26,7 +26,7 @@ class Dealer < Player
 		return false
 	end
 
-	#Only one of the Dealer's cards should be shown
+	#Only one of the Dealer's cards should be shown at first
 	#this method returns the second card in the dealer's hand
 	#to be displayed
 	def face_up_card

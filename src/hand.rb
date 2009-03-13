@@ -49,6 +49,13 @@ class Hand
 		@cards << card	
 	end
 
+	#Convenience method so that you can get the card at
+	#position i in the hand without accessing the cards array
+	#directly
+	def [](index)
+		return cards[index]
+	end
+
 	attr_reader :cards
 
 end

@@ -1,4 +1,6 @@
-class HumanPlayer > Player
+require File.dirname(__FILE__) +'/player.rb'
+
+class HumanPlayer < Player
 
 	#Human players need a name, start with no hands or 
 	#current bets and $1000
@@ -31,7 +33,7 @@ class HumanPlayer > Player
 	#is less than or equal to the money the player has left
 	#less all bets currently in play
 	def valid_bet?(bet_attempt)
-		return bet_attempt <= (@money - @bets.inject { |sum, bet| sum += bet})
+		return bet_attempt <= (@money - @bets.inject(0) { |sum, bet| sum += bet})
 	end
 
 	attr_accessor :money, :bets

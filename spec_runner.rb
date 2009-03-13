@@ -23,7 +23,7 @@ end
 
 #Grab the result line of each test so that wwe can calculate the total
 #number of tests and see if any of them failed
-result_lines = results.scan(/^[0-9]+ examples, [0-9]+ failures$/)
+result_lines = results.scan(/^[0-9]+ examples*, [0-9]+ failures*$/)
 
 #Cycle through the result lines from each individual test
 #to sum up the total number of tests and failures

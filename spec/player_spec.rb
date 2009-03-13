@@ -1,8 +1,8 @@
 #Rspec test for the generic player super-class
 
-require '../src/player'
-require '../src/hand'
-require '../src/card'
+require File.dirname(__FILE__) +'/../src/player'
+require File.dirname(__FILE__) +'/../src/hand'
+require File.dirname(__FILE__) +'/../src/card'
 
 describe Player do
 	

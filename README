@@ -1,8 +1,18 @@
-This is a blackjack program that I wrote as part of the interview process for Rapleaf, a San Francisco based web startup. Rapleaf aggregates publically available information from the social web and delivers reports on their findings to companies that desire to offer a better, more targeted customer experience.
+This is a blackjack program that I wrote as part of the interview process for Rapleaf, a San Francisco based web startup. Rapleaf aggregates publically available information from the social web.
 
-The program can be run at the command line with ruby blackjack.rb
-Automated tests can be run at the command line with ruby spec_runner.rb
+The Blackjack Rules that this program enforces are fairly standard, and are the rules at the St. Louis area casinos.
+	-Blackjacks pay 1.5:1
+	-"Blackjacks" from a split do not count and pay 1:1
+	-You can only double down for the same amount as your original bet, not more or less
+	-You can only split cards that are of the same type (not the same value though, ie, you cannot split a queen and a jack)
 
-If you are interested in Rapleaf, their website resides at www.rapleaf.com
+The program can be run at the command line with 
+ 	ruby blackjack.rb
 
-If you are interested in more of my work, check out thecoffman.github.com
+Automated tests can be run at the command line with
+	ruby spec_runner.rb
+
+I prefer the way that the spec_runner script delivers the output (although the same result could easily be produced with a rakefile)
+But I appreciate the need for standardization, so I have also included a simple rakefile to run the RSpec tests as well.
+	rake spec
+

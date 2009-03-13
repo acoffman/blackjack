@@ -1,7 +1,7 @@
 #RSpec test for hand class
 
-require '../src/card'
-require '../src/hand'
+require File.dirname(__FILE__) + '/../src/card'
+require File.dirname(__FILE__) + '/../src/hand'
 
 describe Hand do
 

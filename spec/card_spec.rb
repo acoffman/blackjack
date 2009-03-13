@@ -1,6 +1,6 @@
 ##RSpec test for the Card Class
 
-require '../src/card'
+require File.dirname(__FILE__) + '/../src/card'
 
 describe Card do
 

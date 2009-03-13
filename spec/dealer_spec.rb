@@ -1,8 +1,8 @@
 #Rspec test for the Dealer sub class of Player
 
-require '../src/dealer'
-require '../src/hand'
-require '../src/card'
+require File.dirname(__FILE__) + '/../src/dealer'
+require File.dirname(__FILE__) + '/../src/hand'
+require File.dirname(__FILE__) + '/../src/card'
 
 describe Dealer do
 

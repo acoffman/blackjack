@@ -1,7 +1,7 @@
 #RSpec test for the Shoe class
 
-require '../src/shoe'
-require '../src/card'
+require File.dirname(__FILE__) +'/../src/shoe'
+require File.dirname(__FILE__) +'/../src/card'
 
 describe Shoe do
 

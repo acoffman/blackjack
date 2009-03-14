@@ -11,7 +11,7 @@ class Hand
 
 	#Is the hand over 21, even its minimum value (if aces)
 	def bust?
-		return hand_value.min > 21	
+		return hand_value.length == 0	
 	end
 
 	#If only two cards are dealt, the hand does not result from a split
@@ -41,7 +41,8 @@ class Hand
 			values = current_values
 		end
 		#exclude duplicate values in the case of multiple aces
-		return values.uniq
+		#as well as values over 21
+		return values.uniq.reject{|x| x > 21}
 	end
 
 	#When taking a hit, you will need to add a card to your hand

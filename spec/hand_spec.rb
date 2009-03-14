@@ -65,7 +65,7 @@ describe Hand do
 		testHand.hand_value.should == [11,21]
 		#Ace, face card, and number card
 		testHand.add_card(@number_card)
-		testHand.hand_value.should == [18,28]
+		testHand.hand_value.should == [18]
 	end
 
 end

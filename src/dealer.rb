@@ -11,17 +11,14 @@ class Dealer < Player
 	#The dealer must hit a 16 or soft 17 and stand on
 	#a hard 17 or higher
 	def must_hit?
-		#weed out bust values
-		valid_values = @hands[0].hand_value.reject {|x| x > 21}
-
 		#hand is a bust - stand
-		return false if valid_values.length == 0
+		return false if @hands[0].hand_value.length == 0
 		#dealer has a hand with a possible value over 17 - stand
-		return false if valid_values.max > 17 
+		return false if @hands[0].hand_value.max > 17 
 		#dealer has a hand with no values over 17 - hit
-		return true if valid_values.max < 17
+		return true if @hands[0].hand_value.max < 17
 		#dealer has a possible 17, but it is soft - hit
-		return true if valid_values.length > 1 && valid_values.max == 17
+		return true if @hands[0].hand_value.length > 1 && @hands[0].hand_value.max == 17
 		#dealer has a 17 that isnt soft - stand
 		return false
 	end

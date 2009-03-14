@@ -95,11 +95,11 @@ class Game
 
 	def is_winner?(hand)
 		return true if not hand.bust? && @DEALER.hand.bust?
-		return (hand.hand_value.reject{|x| x >21}).max >(@DEALER.hand[0].hand_value.reject{|x| x > 21}).max
+		return hand.hand_value.max > @DEALER.hand[0].hand_value.max
 	end
 
 	def is_push?(hand)
-		return (hand.hand_vale.reject{|x| x > 21}).max == (@DEALER.hand[0].hand_value.reject{|x| x > 21}).max
+		return hand.hand_vale.max == @DEALER.hand[0].hand_value.max
 	end
 	
 	def deal_round

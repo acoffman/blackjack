@@ -17,6 +17,7 @@ class Shoe
 
 		#shuffle the decks together, will be nlogn time
 		@cards.sort_by{rand}
+		@num_decks = number_of_decks
 	end
 
 	#returns the top card (actually technically the last element in the array)
@@ -30,5 +31,7 @@ class Shoe
 	def check_remaining_cards
 		return @cards.length
 	end
+
+	attr_reader :number_of_decks
 
 end

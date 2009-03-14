@@ -1,4 +1,4 @@
-%w(shoe player human_player dealer).each do |file|
+%w(shoe player human_player dealer hand).each do |file|
 	require File.dirname(__FILE__) + "/" + file	
 end
 
@@ -9,6 +9,26 @@ class Table
 		@players = []
 		set_up_players
 		add_dealer
+	end
+
+	#This method deals cards to each player, making sure that the shoe
+	#is not running low on cards first
+	def deal(bets)
+		#This should be a fairly safe limit as to how many cards
+		#will be left in the shoe when we reshuffle, but it could
+		#be easily changed if needed
+ 		if @shoe.check_remaining_cards < 6 * @players.length
+			@shoe = Shoe.new(@shoe.number_of_decks)
+			puts "Starting a new shoe!"
+		end
+
+		 @players.each_with_index do |current_player,i|
+			 if current_player.is_a? HumanPlayer
+		 		current_player.add_hand(Hand.new([@shoe.draw_card,@shoe.draw_card],false),bets[i])
+			 else
+				 current_player.add_hand(Hand.new([@shoe.draw_card,@shoe.draw_card],false))
+			 end
+		 end
 	end
 
 	#Asks the user how many players would like to play

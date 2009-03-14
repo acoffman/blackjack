@@ -1,8 +1,10 @@
 #This class is where the actual flow of play is controlled
 #it requires every other class to function
-%w(shoe player human_player dealer table card hand).each do |file|
+%w(shoe player human_player dealer table card hand console).each do |file|
 	require File.dirname(__FILE__) + "/" + file	
 end
+
+include Console
 
 class Game
 
@@ -27,7 +29,7 @@ class Game
 
 			deal_round
 
-			#each player takes their turn
+		  #each player takes their turn
 			@table.players.each do |current_player|
 				take_turn current_player
 			end
@@ -58,10 +60,13 @@ class Game
 	#facilitates the player taking his turn, continuing until
 	#the player stands or busts
 	def take_turn(player)
+		Console::say_turn(player)
 		player.hands.each_with_index do |current_hand,i|
 			choice = ""
 			until [:stand, :double, :bust].include? choice
-				choice = Console::prompt
+				Console::display_dealer(@DEALER)
+				Console::display_hand(current_hand)
+				choice = Console::prompt(current_hand)
 				case choice		
 					when :hit
 						current_hand.add_card(@shoe.draw_card)
@@ -103,7 +108,7 @@ class Game
 	end
 	
 	def deal_round
-		@table.deal(Console::get_bets(@players))
+		@table.deal(Console::get_bets(@table.players))
 	end
 
 end

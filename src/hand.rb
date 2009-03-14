@@ -50,6 +50,16 @@ class Hand
 		@cards << card	
 	end
 
+	def to_s
+		string_val = ""
+		@cards.each do |current_card|
+			string_val << current_card.to_s
+			string_val << ", "
+		end
+		string_val << "(" + hand_value.to_s + ")"
+		return string_val
+	end
+
 	#Convenience method so that you can get the card at
 	#position i in the hand without accessing the cards array
 	#directly

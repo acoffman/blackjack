@@ -22,9 +22,9 @@ class Table
 			puts "Starting a new shoe!"
 		end
 
-		 @players.each_with_index do |current_player,i|
+		 @players.each do |current_player|
 			 if current_player.is_a? HumanPlayer
-		 		current_player.add_hand(Hand.new([@shoe.draw_card,@shoe.draw_card],false),bets[i])
+		 		current_player.add_hand(Hand.new([@shoe.draw_card,@shoe.draw_card],false),current_player.bets[0])
 			 else
 				 current_player.add_hand(Hand.new([@shoe.draw_card,@shoe.draw_card],false))
 			 end

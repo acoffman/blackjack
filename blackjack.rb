@@ -1,6 +1,7 @@
 #This is the driver for the black jack game
+require "src/game"
 
-puts "Welcome to Adam Coffman's Blackjack! \n Prepared for Rapleaf\n"
+puts "Welcome to Adam Coffman's Blackjack! \nPrepared for Rapleaf\n"
 
 blackjack_game = Game.new
 

@@ -2,13 +2,23 @@
 	require File.dirname(__FILE__) + "/" + file	
 end
 
+#This module contains the IO methods that deal
+#with requesting and recieving information
+#from the users. It processes it and sends it 
+#back to the main program in a usable form.
+#This module is also responsible for ensuring the
+#values passed back are valid in the context of the game
 module Console
 
+	#States the current player and their available
+	#money using the overidden to_s method in the player class
 	def say_turn(player)
-		divder
+		divider
 		puts "Current player: " + player.to_s
 	end
 
+	#Cycles through each player in the game and collects their bets
+	#ignores the dealer which has no bet
 	def get_bets(players)
 		players.each do |current_player|
 			if not current_player.is_a? Dealer
@@ -20,13 +30,26 @@ module Console
 				current_player.bets[0] = Integer(bet)
 			end
 		end
+		divider
+	end
+
+	#Displays the dealers face up card to the screen
+	def display_dealer(dealer)
+		puts
+		puts "Dealer shows: #{dealer.face_up_card}" 
+	end
+
+	#Displays the players hand along with potential values to the screen
+	def display_hand(hand)
+		puts "You show: #{hand.to_s}"
 	end
 
 
 	def prompt(hand)
-	
+			
 	end
-
+	
+	#Clears the console window (unless your console is really really tall!)
 	def clear_screen
 		40.times {puts "\n"}
 	end

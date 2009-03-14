@@ -16,7 +16,7 @@ class Shoe
 		end
 
 		#shuffle the decks together, will be nlogn time
-		@cards.sort_by{rand}
+		@cards = @cards.sort_by{rand}
 		@num_decks = number_of_decks
 	end
 

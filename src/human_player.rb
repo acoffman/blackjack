@@ -26,7 +26,7 @@ class HumanPlayer < Player
 	#Returns a string stating the player's name 
 	#and their available money
 	def to_s
-		return name + "\n$" + @money + " available." 
+		return name + "\n$" + @money.to_s + " available." 
 	end
 
 	#Returns true if the bet the player is attempting to make

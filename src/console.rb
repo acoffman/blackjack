@@ -57,9 +57,18 @@ module Console
 
 	#Prints the result of a hand to the console
 	def print_result(result,bet)
-		
+		case result
+		when :lose
+			puts "Hand loses, -$#{bet}"
+		when :win
+			puts "Hand wins, +$#{bet}"
+		when :blackjack
+			puts "Blackjack! Hand wins, +$#{Integer(1.5*bet)}"
+		when :push
+			puts "Push, no change."
+		end
 	end
-
+		
 	#Defaults to 80 chars wide, as that is the default console
 	#width on a mac, but this can be easily modified
 	def divider

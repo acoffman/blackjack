@@ -29,9 +29,15 @@ class Game
 
 			deal_round
 
-		  #each player takes their turn
-			@table.players.each do |current_player|
-				take_turn current_player
+			#if the dealer has a blackjack, everyone loses unless they have
+			#a blackjack
+			if @DEALER.hand[0].blackjack?
+			#TODO HANDLE BLACKJACK DEALER BOOL FLAG
+			else
+		  	#each player takes their turn
+				@table.players.each do |current_player|
+					take_turn current_player
+				end
 			end
 		
 			#each player's winnings or loses are calculated after 
@@ -87,6 +93,7 @@ class Game
 		player.hands.each_with_index do |current_hand, i|
 			Console::display_hand(current_hand)
 			result =""
+			
 			if current_hand.bust?
 				result = :bust
 			elsif is_winner?(current_hand)

@@ -44,7 +44,8 @@ module Console
 		puts "You show: #{hand.to_s}"
 	end
 
-
+	#Displays the appropriate prompt for the given hand and returns the
+	#result back to the main program
 	def prompt(hand)
 			
 	end
@@ -54,6 +55,7 @@ module Console
 		40.times {puts "\n"}
 	end
 
+	#Prints the result of a hand to the console
 	def print_result(result,bet)
 		
 	end

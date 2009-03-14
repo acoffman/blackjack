@@ -83,30 +83,45 @@ class Game
 
 	#Calculates the appropriate payouts for each player
 	def calculate_winnings(player)
+	Console::display_turn(player)
 		player.hands.each_with_index do |current_hand, i|
-			if not current_hand.bust?
-				if is_winner?(current_hand)
-					if current_hand.blackjack?
-						player.money += Integer(2.5 * player.bets[i])
-					else
-						player.money += 2 * player.bets[i] 
-					end
-				elsif is_push?(current_hand)
-					player.money += player.bets[i]
+			Console::display_hand(current_hand)
+			result =""
+			if current_hand.bust?
+				result = :bust
+			elsif is_winner?(current_hand)
+				if current_hand.blackjack?
+					player.money += Integer(2.5 * player.bets[i])
+					result = :blackjack
+				else
+					player.money += 2 * player.bets[i]
+					result = :win
 				end
+			elsif is_push?(current_hand)
+				player.money += player.bets[i]
+				result = :push
+			else
+				result = :lose
 			end
+			Console::display_result(result, player.bets[i])
 		end
 	end
 
+	#Compares the hand to the dealer's hand to determine if it 
+	#is a winner
 	def is_winner?(hand)
 		return true if not hand.bust? && @DEALER.hand.bust?
 		return hand.hand_value.max > @DEALER.hand[0].hand_value.max
 	end
-
+	
+	#Compares the hand to the dealer's hand to determine if it
+	#is a push
 	def is_push?(hand)
 		return hand.hand_vale.max == @DEALER.hand[0].hand_value.max
 	end
 	
+	#Uses the console module to get each player's bets
+	#and then deals a hand to each player
 	def deal_round
 		@table.deal(Console::get_bets(@table.players))
 	end

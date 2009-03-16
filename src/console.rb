@@ -34,9 +34,10 @@ module Console
 	end
 
 	#Displays the dealers face up card to the screen
-	def display_dealer(dealer, game_over)
+	#Or if the round is over, displays the Dealer's entire hand
+	def display_dealer(dealer, round_over)
 		puts
-		if game_over
+		if round_over
 			puts "Dealer: #{dealer.hands[0].to_s}"
 		else
 			puts "Dealer shows: #{dealer.face_up_card}"
@@ -45,11 +46,14 @@ module Console
 
 	#Displays the players hand along with potential values to the screen
 	def display_hand(hand)
-		puts "You show: #{hand.to_s}"
+		puts "You show: #{hand.to_s}\n"
 	end
 
 	#Displays the appropriate prompt for the given hand and returns the
 	#result back to the main program
+	#If the Player is a Dealer, it generates the response automatically
+	#This function also checks to see what moves are valid before 
+	#allowing the user to select them
 	def prompt(hand_num,player)
 			if player.is_a? Dealer
 				return :hit if player.must_hit?
@@ -69,11 +73,16 @@ module Console
 			end
 			print "#{player.name}, please make a selection: "
 
+			#By parsing choice this way, the user can enter
+			#just the first letter, upper or lower case as well
+			#as the entire word if they wish
 			choice = gets.strip.upcase[0..0]
 			until valid_choices.include?(choice)
 				puts "Invalid selection, please try again: "
 				choice = gets.strip.upcase[0..0]
 			end
+			#After we have a valid result, return the correct message to the
+			#main program
 			case choice
 				when "H"
 					return :hit
@@ -103,21 +112,57 @@ module Console
 		when :push
 			puts "Push, no change."
 		when :bust
-			puts "Bust!, hand loses, -$#{bet}"
+			puts "Bust! Hand loses, -$#{bet}"
 		end
 	end
 		
-	#Defaults to 80 chars wide, as that is the default console
-	#width on a mac, but this can be easily modified
+	#Defaults to 55 chars wide, but that could easily be 
+	#changed if desired
 	def divider
 		puts
-		80.times {print "-"}
+		55.times {print "-"}
 		puts 
 	end
 
 	#Used to make sure that a string input is a valid integer	
 	def is_integer?(input)
 		return input =~ /^[0-9]+$/
+	end
+
+	#displays a given message to the screen
+	def display_message(msg)
+		puts msg
+	end
+
+
+	#Asks the user how many players would like to play
+	#Then gets names, creates the players and adds them to the table
+	def set_up_players
+		num_players = ""
+
+		until is_integer?(num_players) 
+			puts "Please enter a non-zero integer value for the number of players."
+			num_players = gets
+		end 
+
+		if num_players == "0\n"
+			puts "You need at least one player, defaulting to one."
+			num_players = 1
+		end
+		players = []
+		Integer(num_players).times {|player_num| add_human_player(player_num+1,players)}
+		return players
+	end
+
+	#Asks the player for a name or supplies a default value
+	#if none is entered and adds the player to the players array at
+	#the table
+	def add_human_player(player_num,players)
+		name = ""
+		puts "Player #{player_num} please enter your name or hit enter for the default: "
+		name = gets
+		name = "Player #{player_num}" if name.strip! == ""
+		players << HumanPlayer.new(name)
 	end
 
 end

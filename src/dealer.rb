@@ -30,6 +30,15 @@ class Dealer < Player
 		return @hands[0][1]
 	end
 
+	#The dealer will only ever have one hand, so this method cleans up
+	#the code in the other classes. Eliminates the need to type
+	#@DEALER.hands[0] 
+	def hand
+		return @hands[0]
+	end
+
+	#Returns the string "dealer" 
+	#move along..nothing to see here...
 	def to_s
 		return "Dealer"
 	end

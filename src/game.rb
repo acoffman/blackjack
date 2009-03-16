@@ -6,6 +6,8 @@ end
 
 include Console
 
+#The Game class controls the flow of gameplay for a 
+#Table object.
 class Game
 
 	@@NUMBER_OF_DECKS_IN_A_SHOE = 6
@@ -29,14 +31,14 @@ class Game
 
 			deal_round
 
-			 if !@DEALER.hands[0].blackjack?
+			 if !@DEALER.hand.blackjack?
 		  	#each player takes their turn
 				@table.players.each do |current_player|
 					take_turn current_player
 				end
 				Console::clear_screen
 			 else
-				 puts "Dealer Blackjack!"
+				 Console::display_message("Dealer Blackjack!")
 			end
 
 			Console::display_dealer(@DEALER,true)
@@ -49,7 +51,7 @@ class Game
 
 				#If this isn't the dealer and is out of money, drop from the game
 				if current_player.is_a?(HumanPlayer) && current_player.money == 0
-					puts "#{current_player.name} is out of money and cannot continue."
+					Console::display_message("#{current_player.name} is out of money and cannot continue.")
 					@table.players.delete(current_player)
 				end
 
@@ -65,7 +67,7 @@ class Game
 
 	#Using the console module to collect user responses, the method
 	#facilitates the player taking his turn, continuing until
-	#the player stands or busts
+	#the player stands, busts, or doubles down
 	def take_turn(player)
 		Console::divider
 		Console::display_turn(player) unless player.is_a? Dealer
@@ -89,7 +91,7 @@ class Game
 				end
 				if (current_hand.bust? && player.is_a?(HumanPlayer))
 					choice = :bust
-					puts "Bust!"
+					Console::display_message("Bust!")
 				end
 			end
 		end
@@ -101,7 +103,11 @@ class Game
 		player.hands.each_with_index do |current_hand, i|
 			Console::display_hand(current_hand)
 			result =""
-			
+		
+			#The money bet is already removed from the player's
+			#total available funds, so for wins we need to return
+			#the money, plus whatever the payout is
+			#for loses, we just don't re-add the bet
 			if current_hand.bust?
 				result = :bust
 			elsif is_winner?(current_hand)
@@ -126,14 +132,14 @@ class Game
 	#Compares the hand to the dealer's hand to determine if it 
 	#is a winner
 	def is_winner?(hand)
-		return true if !hand.bust? && @DEALER.hands[0].bust?
-		return hand.hand_value.max > @DEALER.hands[0].hand_value.max
+		return true if !hand.bust? && @DEALER.hand.bust?
+		return hand.hand_value.max > @DEALER.hand.hand_value.max
 	end
 	
 	#Compares the hand to the dealer's hand to determine if it
 	#is a push
 	def is_push?(hand)
-		return hand.hand_value.max == @DEALER.hands[0].hand_value.max
+		return hand.hand_value.max == @DEALER.hand.hand_value.max
 	end
 	
 	#Uses the console module to get each player's bets

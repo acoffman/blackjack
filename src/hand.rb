@@ -50,6 +50,8 @@ class Hand
 		@cards << card	
 	end
 
+	#Prints out the player's hand as a string, and then the numeric
+	#value of the hand (or bust if it is)
 	def to_s
 		string_val = ""
 		@cards.each do |current_card|
@@ -71,6 +73,8 @@ class Hand
 		return cards[index]
 	end
 
+	#Allows cards in the player's hand to be reassigned.
+	#Used primarily for splits
 	def []=(index, card)
 		@cards[index] = card
 	end

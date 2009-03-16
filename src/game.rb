@@ -33,7 +33,9 @@ class Game
 		until game_over
 
 			deal_round
-
+			#if everyone quit before the round started, no need to continue
+			break if @table.players.length == 1 
+			
 			 if !@DEALER.hand.blackjack?
 		  	#each player takes their turn
 				@table.players.each do |current_player|
@@ -158,7 +160,7 @@ class Game
 		@table.players.each_with_index do |player, i|
 			@table.players.delete(player) if did_quit[i] == :quit
 		end
-		@table.deal
+		@table.deal unless @table.players.length == 1	
 		Console::clear_screen
 	end
 

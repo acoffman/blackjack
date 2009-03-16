@@ -5,8 +5,8 @@ end
 include Console
 
 #The table class represents and stores information pertaining to the
-#"table" of blackjack, including the shoe, the current players and the
-#dealer. 
+#"table" of blackjack, including the Shoe, the current Players and the
+#Dealer. 
 class Table
 	
 	def initialize(number_of_decks)
@@ -44,10 +44,12 @@ class Table
 		@players << Dealer.new
 	end
 
+	attr_accessor :players, :shoe
+
 	#no one needs to use this method externally
 	private :add_dealer 
 
-	attr_accessor :players, :shoe
+	
 
 end
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>deal (Table)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/table.rb, line 23</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">deal</span>
+                <span class="ruby-comment cmt">#This should be a fairly safe limit as to how many cards</span>
+                <span class="ruby-comment cmt">#will be left in the shoe when we reshuffle, but it could</span>
+                <span class="ruby-comment cmt">#be easily changed if needed</span>
+                <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@shoe</span>.<span class="ruby-identifier">check_remaining_cards</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">6</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">length</span>
+                        <span class="ruby-ivar">@shoe</span> = <span class="ruby-constant">Shoe</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@num_decks</span>)
+                <span class="ruby-keyword kw">end</span>
+
+                 <span class="ruby-ivar">@players</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">current_player</span><span class="ruby-operator">|</span>
+                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_player</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">HumanPlayer</span>
+                              <span class="ruby-identifier">current_player</span>.<span class="ruby-identifier">add_hand</span>(<span class="ruby-constant">Hand</span>.<span class="ruby-identifier">new</span>([<span class="ruby-ivar">@shoe</span>.<span class="ruby-identifier">draw_card</span>,<span class="ruby-ivar">@shoe</span>.<span class="ruby-identifier">draw_card</span>],<span class="ruby-keyword kw">false</span>),<span class="ruby-identifier">current_player</span>.<span class="ruby-identifier">bets</span>[<span class="ruby-value">0</span>])
+                         <span class="ruby-keyword kw">else</span>
+                                 <span class="ruby-identifier">current_player</span>.<span class="ruby-identifier">add_hand</span>(<span class="ruby-constant">Hand</span>.<span class="ruby-identifier">new</span>([<span class="ruby-ivar">@shoe</span>.<span class="ruby-identifier">draw_card</span>,<span class="ruby-ivar">@shoe</span>.<span class="ruby-identifier">draw_card</span>],<span class="ruby-keyword kw">false</span>))
+                         <span class="ruby-keyword kw">end</span>
+                 <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>calculate_winnings (Game)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/game.rb, line 106</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">calculate_winnings</span>(<span class="ruby-identifier">player</span>)
+                <span class="ruby-constant">Console</span><span class="ruby-operator">::</span><span class="ruby-identifier">display_turn</span>(<span class="ruby-identifier">player</span>)
+                <span class="ruby-identifier">player</span>.<span class="ruby-identifier">hands</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">current_hand</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+                        <span class="ruby-constant">Console</span><span class="ruby-operator">::</span><span class="ruby-identifier">display_hand</span>(<span class="ruby-identifier">current_hand</span>)
+                        <span class="ruby-identifier">result</span> =<span class="ruby-value str">&quot;&quot;</span>
+                
+                        <span class="ruby-comment cmt">#The money bet is already removed from the player's</span>
+                        <span class="ruby-comment cmt">#total available funds, so for wins we need to return</span>
+                        <span class="ruby-comment cmt">#the money, plus whatever the payout is</span>
+                        <span class="ruby-comment cmt">#for loses, we just don't re-add the bet</span>
+                        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_hand</span>.<span class="ruby-identifier">bust?</span>
+                                <span class="ruby-identifier">result</span> = <span class="ruby-identifier">:bust</span>
+                        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">is_winner?</span>(<span class="ruby-identifier">current_hand</span>)
+                                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_hand</span>.<span class="ruby-identifier">blackjack?</span>
+                                        <span class="ruby-identifier">player</span>.<span class="ruby-identifier">money</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">Integer</span>(<span class="ruby-value">2.5</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">player</span>.<span class="ruby-identifier">bets</span>[<span class="ruby-identifier">i</span>])
+                                        <span class="ruby-identifier">result</span> = <span class="ruby-identifier">:blackjack</span>
+                                <span class="ruby-keyword kw">else</span>
+                                        <span class="ruby-identifier">player</span>.<span class="ruby-identifier">money</span> <span class="ruby-operator">+=</span> <span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">player</span>.<span class="ruby-identifier">bets</span>[<span class="ruby-identifier">i</span>]
+                                        <span class="ruby-identifier">result</span> = <span class="ruby-identifier">:win</span>
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">is_push?</span>(<span class="ruby-identifier">current_hand</span>)
+                                <span class="ruby-identifier">player</span>.<span class="ruby-identifier">money</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">player</span>.<span class="ruby-identifier">bets</span>[<span class="ruby-identifier">i</span>]
+                                <span class="ruby-identifier">result</span> = <span class="ruby-identifier">:push</span>
+                        <span class="ruby-keyword kw">else</span>
+                                <span class="ruby-identifier">result</span> = <span class="ruby-identifier">:lose</span>
+                        <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-constant">Console</span><span class="ruby-operator">::</span><span class="ruby-identifier">display_result</span>(<span class="ruby-identifier">result</span>, <span class="ruby-identifier">player</span>.<span class="ruby-identifier">bets</span>[<span class="ruby-identifier">i</span>])
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-constant">Console</span><span class="ruby-operator">::</span><span class="ruby-identifier">divider</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

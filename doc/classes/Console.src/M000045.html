@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>display_result (Console)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/console.rb, line 114</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">display_result</span>(<span class="ruby-identifier">result</span>,<span class="ruby-identifier">bet</span>)
+                <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">result</span>
+                <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:lose</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Hand loses, -$#{bet}&quot;</span>
+                <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:win</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Hand wins, +$#{bet}&quot;</span>
+                <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:blackjack</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Blackjack! Hand wins, +$#{Integer(1.5*bet)}&quot;</span>
+                <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:push</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Push, no change.&quot;</span>
+                <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:bust</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Bust! Hand loses, -$#{bet}&quot;</span>
+                <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

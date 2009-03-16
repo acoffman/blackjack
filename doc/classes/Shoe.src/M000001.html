@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Shoe)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/shoe.rb, line 8</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">number_of_decks</span>)
+                <span class="ruby-ivar">@cards</span> = []
+                <span class="ruby-identifier">number_of_decks</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+                        <span class="ruby-ivar">@@VALUES</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">current_value</span><span class="ruby-operator">|</span>
+                                <span class="ruby-ivar">@@SUITS</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">current_suit</span><span class="ruby-operator">|</span>
+                                        <span class="ruby-ivar">@cards</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Card</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">current_suit</span>, <span class="ruby-identifier">current_value</span>)
+                                <span class="ruby-keyword kw">end</span>
+                        <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">end</span>
+
+                <span class="ruby-comment cmt">#shuffle the decks together, will be nlogn time</span>
+                <span class="ruby-ivar">@cards</span> = <span class="ruby-ivar">@cards</span>.<span class="ruby-identifier">sort_by</span>{<span class="ruby-identifier">rand</span>}
+                <span class="ruby-ivar">@num_decks</span> = <span class="ruby-identifier">number_of_decks</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

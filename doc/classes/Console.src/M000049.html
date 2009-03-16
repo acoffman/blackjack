@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>set_up_players (Console)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File src/console.rb, line 150</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_up_players</span>
+                <span class="ruby-identifier">num_players</span> = <span class="ruby-value str">&quot;&quot;</span>
+
+                <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">is_integer?</span>(<span class="ruby-identifier">num_players</span>) 
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Please enter a non-zero integer value for the number of players.&quot;</span>
+                        <span class="ruby-identifier">num_players</span> = <span class="ruby-identifier">gets</span>
+                <span class="ruby-keyword kw">end</span> 
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">num_players</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;0\n&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;You need at least one player, defaulting to one.&quot;</span>
+                        <span class="ruby-identifier">num_players</span> = <span class="ruby-value">1</span>
+                <span class="ruby-keyword kw">end</span>
+                <span class="ruby-identifier">players</span> = []
+                <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">num_players</span>).<span class="ruby-identifier">times</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">player_num</span><span class="ruby-operator">|</span> <span class="ruby-identifier">add_human_player</span>(<span class="ruby-identifier">player_num</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>,<span class="ruby-identifier">players</span>)}
+                <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">players</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

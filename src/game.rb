@@ -59,13 +59,9 @@ class Game
 					Console::display_message("#{current_player.name} is out of money and cannot continue.")
 					@table.players.delete(current_player)
 				end
-
 			end
-				#If only the dealer remains, the game is over
-				game_over = true if @table.players.length == 1
-				if @table.players.length == 1 
-					break
-				end
+			#If only the dealer remains, the game is over
+			game_over = true if @table.players.length == 1
 		end
 		Console::divider
 		Console::display_message("Thanks for playing!")

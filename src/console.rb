@@ -107,7 +107,7 @@ module Console
 	
 	#Clears the console window (unless your console is really really tall!)
 	def clear_screen
-		40.times {puts "\n"}
+		50.times {puts "\n"}
 	end
 
 	#Prints the result of a hand to the console

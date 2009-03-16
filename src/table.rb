@@ -20,7 +20,7 @@ class Table
 
 	#This method deals cards to each player, making sure that the shoe
 	#is not running low on cards first
-	def deal(bets)
+	def deal
 		#This should be a fairly safe limit as to how many cards
 		#will be left in the shoe when we reshuffle, but it could
 		#be easily changed if needed

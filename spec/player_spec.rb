@@ -1,4 +1,4 @@
-#Rspec test for the generic player super-class
+#Rspec test for the generic Player super-class
 
 require File.dirname(__FILE__) +'/../src/player'
 require File.dirname(__FILE__) +'/../src/hand'

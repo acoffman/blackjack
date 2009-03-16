@@ -1,4 +1,4 @@
-#RSpec test for the Human Player class, which is a descendent of 
+#RSpec test for the HumanPlayer class, which is a descendent of 
 #the Player class
 require File.dirname(__FILE__) +'/../src/human_player'
 require File.dirname(__FILE__) +'/../src/card'

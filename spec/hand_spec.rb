@@ -1,4 +1,4 @@
-#RSpec test for hand class
+#RSpec test for Hand class
 
 require File.dirname(__FILE__) + '/../src/card'
 require File.dirname(__FILE__) + '/../src/hand'

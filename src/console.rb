@@ -19,18 +19,28 @@ module Console
 
 	#Cycles through each player in the game and collects their bets
 	#ignores the dealer which has no bet
+	#This function also returns an array to the main program
+	#to determine if a player wants to quit or not
 	def get_bets(players)
+		did_quit = []
 		players.each do |current_player|
 			if not current_player.is_a? Dealer
 				bet = ""
 				until is_integer?(bet) && Integer(bet) <= current_player.money && Integer(bet) > 0
-					print "#{current_player.name} please enter an integer bet between 1 and #{current_player.money}: "
+					print "#{current_player.name} please enter an integer bet between 1 and #{current_player.money} or Q to quit: "
 					bet = gets.chomp
+					if bet.upcase[0..0] == "Q"
+						did_quit << :quit
+						break
+					else
+						did_quit << :no
+						current_player.bets[0] = Integer(bet)
+					end
 				end
-				current_player.bets[0] = Integer(bet)
 			end
 		end
 		divider
+		return did_quit
 	end
 
 	#Displays the dealers face up card to the screen

@@ -148,9 +148,17 @@ class Game
 	end
 	
 	#Uses the console module to get each player's bets
-	#and then deals a hand to each player
+	#and then deals a hand to each player.
+	#this function also removes players if they want to
+	#quit
 	def deal_round
-		@table.deal(Console::get_bets(@table.players))
+		
+		did_quit = Console::get_bets(@table.players)
+
+		@table.players.each_with_index do |player, i|
+			@table.players.delete(player) if did_quit[i] == :quit
+		end
+		@table.deal
 		Console::clear_screen
 	end
 

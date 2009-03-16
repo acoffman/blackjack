@@ -160,6 +160,7 @@ class Game
 		@table.players.each_with_index do |player, i|
 			@table.players.delete(player) if did_quit[i] == :quit
 		end
+		#don't bother to deal if everyone quit
 		@table.deal unless @table.players.length == 1	
 		Console::clear_screen
 	end

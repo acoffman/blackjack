@@ -34,7 +34,7 @@ module Console
 						break
 					else
 						did_quit << :no
-						current_player.bets[0] = Integer(bet)
+						current_player.bets[0] = Integer(bet) if is_integer? bet
 					end
 				end
 			end

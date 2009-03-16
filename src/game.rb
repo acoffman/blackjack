@@ -63,6 +63,9 @@ class Game
 			end
 				#If only the dealer remains, the game is over
 				game_over = true if @table.players.length == 1
+				if @table.players.length == 1 
+					break
+				end
 		end
 		Console::divider
 		Console::display_message("Thanks for playing!")
@@ -92,8 +95,8 @@ class Game
 						current_hand[1] = @table.shoe.draw_card
 					when :double
 						current_hand.add_card(@table.shoe.draw_card)
-						player.bets[i] = player.bets[i] * 2
 						player.money -= player.bets[i]
+						player.bets[i] = player.bets[i] * 2
 						Console::display_hand(current_hand)
 				end
 				if (current_hand.bust? && player.is_a?(HumanPlayer))

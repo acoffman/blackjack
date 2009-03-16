@@ -15,6 +15,9 @@ class Game
 	#Constructor starts a table for the game and sets up
 	#a constant to represent the dealer
 	def initialize
+		Console::clear_screen
+		Console::divider
+		Console::display_message("Welcome to Adam Coffman's Blackjack! \nPrepared for Rapleaf!")
 		@table = Table.new(@@NUMBER_OF_DECKS_IN_A_SHOE)
 		@DEALER = @table.players[@table.players.length-1]
 	end
@@ -59,6 +62,8 @@ class Game
 				#If only the dealer remains, the game is over
 				game_over = true if @table.players.length == 1
 		end
+		Console::divider
+		Console::display_message("Thanks for playing!")
 	end
 
 	#play is the only publically accessable member besides the constructor

@@ -11,6 +11,7 @@ class Table
 	
 	def initialize(number_of_decks)
 		@shoe = Shoe.new(number_of_decks)
+		@num_decks = number_of_decks
 		@players = Console::set_up_players
 		add_dealer
 		Console::clear_screen
@@ -24,8 +25,7 @@ class Table
 		#will be left in the shoe when we reshuffle, but it could
 		#be easily changed if needed
  		if @shoe.check_remaining_cards < 6 * @players.length
-			@shoe = Shoe.new(@shoe.number_of_decks)
-			Console::display_message("Starting a new shoe!")
+			@shoe = Shoe.new(@num_decks)
 		end
 
 		 @players.each do |current_player|

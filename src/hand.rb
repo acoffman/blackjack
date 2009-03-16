@@ -56,7 +56,11 @@ class Hand
 			string_val << current_card.to_s
 			string_val << ", "
 		end
-		string_val << "(" + hand_value.to_s + ")"
+		if hand_value.length == 0
+			string_val << "BUST"
+		else
+			string_val << "(" + hand_value.join(",") + ")"
+		end
 		return string_val
 	end
 
@@ -65,6 +69,10 @@ class Hand
 	#directly
 	def [](index)
 		return cards[index]
+	end
+
+	def []=(index, card)
+		@cards[index] = card
 	end
 
 	attr_reader :cards

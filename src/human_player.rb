@@ -20,6 +20,7 @@ class HumanPlayer < Player
 	#Adds a hand and corresponding bet to the player
 	def add_hand(hand, bet)
 		@bets << bet
+		@money -= bet
 		super(hand)
 	end
 	
@@ -33,7 +34,7 @@ class HumanPlayer < Player
 	#is less than or equal to the money the player has left
 	#less all bets currently in play
 	def valid_bet?(bet_attempt)
-		return bet_attempt <= (@money - @bets.inject(0) { |sum, bet| sum += bet})
+		return bet_attempt <= @money
 	end
 
 	attr_accessor :money, :bets

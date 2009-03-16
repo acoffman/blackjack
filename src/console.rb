@@ -12,7 +12,7 @@ module Console
 
 	#States the current player and their available
 	#money using the overidden to_s method in the player class
-	def say_turn(player)
+	def display_turn(player)
 		divider
 		puts "Current player: " + player.to_s
 	end
@@ -34,9 +34,13 @@ module Console
 	end
 
 	#Displays the dealers face up card to the screen
-	def display_dealer(dealer)
+	def display_dealer(dealer, game_over)
 		puts
-		puts "Dealer shows: #{dealer.face_up_card}" 
+		if game_over
+			puts "Dealer: #{dealer.hands[0].to_s}"
+		else
+			puts "Dealer shows: #{dealer.face_up_card}"
+		end
 	end
 
 	#Displays the players hand along with potential values to the screen
@@ -46,8 +50,40 @@ module Console
 
 	#Displays the appropriate prompt for the given hand and returns the
 	#result back to the main program
-	def prompt(hand)
+	def prompt(hand_num,player)
+			if player.is_a? Dealer
+				return :hit if player.must_hit?
+				return :stand
+			end
 			
+			valid_choices = ["H","S"]
+			puts "H: Hit"
+			puts "S: Stand"
+			if player.hands[hand_num].splitable? && player.valid_bet?(player.bets[hand_num])
+				puts "P: Split"
+				valid_choices << "P"
+			end
+			if player.valid_bet?(player.bets[hand_num])
+				puts "D: Double Down"
+				valid_choices << "D"
+			end
+			print "#{player.name}, please make a selection: "
+
+			choice = gets.strip.upcase[0..0]
+			until valid_choices.include?(choice)
+				puts "Invalid selection, please try again: "
+				choice = gets.strip.upcase[0..0]
+			end
+			case choice
+				when "H"
+					return :hit
+				when "S"
+					return :stand
+				when "P"
+					return :split
+				when "D"
+					return :double
+			end
 	end
 	
 	#Clears the console window (unless your console is really really tall!)
@@ -56,7 +92,7 @@ module Console
 	end
 
 	#Prints the result of a hand to the console
-	def print_result(result,bet)
+	def display_result(result,bet)
 		case result
 		when :lose
 			puts "Hand loses, -$#{bet}"
@@ -66,6 +102,8 @@ module Console
 			puts "Blackjack! Hand wins, +$#{Integer(1.5*bet)}"
 		when :push
 			puts "Push, no change."
+		when :bust
+			puts "Bust!, hand loses, -$#{bet}"
 		end
 	end
 		

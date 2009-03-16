@@ -29,16 +29,17 @@ class Game
 
 			deal_round
 
-			#if the dealer has a blackjack, everyone loses unless they have
-			#a blackjack
-			if @DEALER.hand[0].blackjack?
-			#TODO HANDLE BLACKJACK DEALER BOOL FLAG
-			else
+			 if !@DEALER.hands[0].blackjack?
 		  	#each player takes their turn
 				@table.players.each do |current_player|
 					take_turn current_player
 				end
+				Console::clear_screen
+			 else
+				 puts "Dealer Blackjack!"
 			end
+
+			Console::display_dealer(@DEALER,true)
 		
 			#each player's winnings or loses are calculated after 
 			@table.players.each do |current_player|
@@ -47,7 +48,7 @@ class Game
 				current_player.clear!
 
 				#If this isn't the dealer and is out of money, drop from the game
-				if current_player.is_a? HumanPlayer && current_player.money == 0
+				if current_player.is_a?(HumanPlayer) && current_player.money == 0
 					puts "#{current_player.name} is out of money and cannot continue."
 					@table.players.delete(current_player)
 				end
@@ -66,22 +67,29 @@ class Game
 	#facilitates the player taking his turn, continuing until
 	#the player stands or busts
 	def take_turn(player)
-		Console::say_turn(player)
+		Console::divider
+		Console::display_turn(player) unless player.is_a? Dealer
 		player.hands.each_with_index do |current_hand,i|
 			choice = ""
 			until [:stand, :double, :bust].include? choice
-				Console::display_dealer(@DEALER)
-				Console::display_hand(current_hand)
-				choice = Console::prompt(current_hand)
+				Console::display_dealer(@DEALER,false) unless player.is_a? Dealer
+				Console::display_hand(current_hand) unless player.is_a? Dealer
+				choice = Console::prompt(i, player)
 				case choice		
 					when :hit
-						current_hand.add_card(@shoe.draw_card)
+						current_hand.add_card(@table.shoe.draw_card)
 					when :split
-						player.hands.add_hand(Hand.new([current_hand[1], @shoe.draw_card], true),player.bets[i])
-						current_hand[1] = @shoe.draw_card
+						player.add_hand(Hand.new([current_hand[1], @table.shoe.draw_card], true),player.bets[i])
+						current_hand[1] = @table.shoe.draw_card
 					when :double
-						current_hand.add_card(@shoe.draw_card)
+						current_hand.add_card(@table.shoe.draw_card)
 						player.bets[i] = player.bets[i] * 2
+						player.money -= player.bets[i]
+						Console::display_hand(current_hand)
+				end
+				if (current_hand.bust? && player.is_a?(HumanPlayer))
+					choice = :bust
+					puts "Bust!"
 				end
 			end
 		end
@@ -89,7 +97,7 @@ class Game
 
 	#Calculates the appropriate payouts for each player
 	def calculate_winnings(player)
-	Console::display_turn(player)
+		Console::display_turn(player)
 		player.hands.each_with_index do |current_hand, i|
 			Console::display_hand(current_hand)
 			result =""
@@ -112,25 +120,27 @@ class Game
 			end
 			Console::display_result(result, player.bets[i])
 		end
+		Console::divider
 	end
 
 	#Compares the hand to the dealer's hand to determine if it 
 	#is a winner
 	def is_winner?(hand)
-		return true if not hand.bust? && @DEALER.hand.bust?
-		return hand.hand_value.max > @DEALER.hand[0].hand_value.max
+		return true if !hand.bust? && @DEALER.hands[0].bust?
+		return hand.hand_value.max > @DEALER.hands[0].hand_value.max
 	end
 	
 	#Compares the hand to the dealer's hand to determine if it
 	#is a push
 	def is_push?(hand)
-		return hand.hand_vale.max == @DEALER.hand[0].hand_value.max
+		return hand.hand_value.max == @DEALER.hands[0].hand_value.max
 	end
 	
 	#Uses the console module to get each player's bets
 	#and then deals a hand to each player
 	def deal_round
 		@table.deal(Console::get_bets(@table.players))
+		Console::clear_screen
 	end
 
 end

@@ -1,6 +1,8 @@
-%w(shoe player human_player dealer hand).each do |file|
+%w(shoe player human_player dealer hand console).each do |file|
 	require File.dirname(__FILE__) + "/" + file	
 end
+
+include Console
 
 class Table
 	
@@ -9,6 +11,8 @@ class Table
 		@players = []
 		set_up_players
 		add_dealer
+		Console::clear_screen
+		Console::divider
 	end
 
 	#This method deals cards to each player, making sure that the shoe
@@ -71,6 +75,7 @@ class Table
 	def is_integer?(input)
 		return input =~ /^[0-9]+$/
 	end
+
 
 	#no one needs to use these methods externally
 	private :is_integer?, :add_dealer, :add_human_player, :set_up_players

@@ -1,5 +1,5 @@
 #This is the driver for the black jack game
-require "src/game"
+require File.dirname(__FILE__) +"/src/game"
 
 puts "Welcome to Adam Coffman's Blackjack! \nPrepared for Rapleaf\n"
 
